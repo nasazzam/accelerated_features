@@ -1,0 +1,19 @@
+# Include weight files
+recursive-include weights *.pt
+
+# Include asset files
+recursive-include assets *.json *.png
+
+# Include license and readme
+include LICENSE
+include README.md
+
+# Include requirements
+include requirements.txt
+
+# Exclude unnecessary files
+exclude .gitignore
+recursive-exclude notebooks *
+recursive-exclude figs *
+prune third_party
+

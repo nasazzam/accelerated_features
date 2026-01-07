@@ -35,7 +35,7 @@ class LighterGlue(nn.Module):
         if os.path.exists(weights):
             state_dict = torch.load(weights, map_location=self.dev)
         else:
-            state_dict = torch.hub.load_state_dict_from_url("https://github.com/verlab/accelerated_features/raw/main/weights/xfeat-lighterglue.pt")
+            state_dict = torch.hub.load_state_dict_from_url("https://github.com/nasazzam/accelerated_features/raw/main/weights/xfeat-lighterglue.pt")
 
         # rename old state dict entries
         for i in range(self.net.conf.n_layers):

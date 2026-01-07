@@ -9,7 +9,7 @@ def XFeat(pretrained=True, top_k=4096, detection_threshold=0.05):
     """
     weights = None
     if pretrained:
-        weights = torch.hub.load_state_dict_from_url("https://github.com/verlab/accelerated_features/raw/main/weights/xfeat.pt")
+        weights = torch.hub.load_state_dict_from_url("https://github.com/nasazzam/accelerated_features/raw/main/weights/xfeat.pt")
     
     model = _XFeat(weights, top_k=top_k, detection_threshold=detection_threshold)
     return model

@@ -2,13 +2,13 @@
 [Guilherme Potje](https://guipotje.github.io/) · [Felipe Cadar](https://eucadar.com/) · [Andre Araujo](https://andrefaraujo.github.io/) · [Renato Martins](https://renatojmsdh.github.io/) · [Erickson R. Nascimento](https://homepages.dcc.ufmg.br/~erickson/)
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/verlab/accelerated_features/blob/main/notebooks/xfeat_matching.ipynb)  
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nasazzam/accelerated_features/blob/main/notebooks/xfeat_matching.ipynb)  
 [![Open in Spaces](https://huggingface.co/datasets/huggingface/badges/resolve/main/open-in-hf-spaces-sm-dark.svg)](https://huggingface.co/spaces/qubvel-hf/xfeat)
 
 ### [[ArXiv]](https://arxiv.org/abs/2404.19174) | [[Project Page]](https://www.verlab.dcc.ufmg.br/descriptors/xfeat_cvpr24/) |  [[CVPR'24 Paper]](https://openaccess.thecvf.com/content/CVPR2024/html/Potje_XFeat_Accelerated_Features_for_Lightweight_Image_Matching_CVPR_2024_paper.html)
 
-- Training code is now available -> [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/verlab/accelerated_features/blob/main/notebooks/XFeat_training_example.ipynb)
-- 🎉 **New!** XFeat + LighterGlue (smaller version of LightGlue) available! 🚀 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/verlab/accelerated_features/blob/main/notebooks/xfeat%2Blg_torch_hub.ipynb)
+- Training code is now available -> [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nasazzam/accelerated_features/blob/main/notebooks/XFeat_training_example.ipynb)
+- 🎉 **New!** XFeat + LighterGlue (smaller version of LightGlue) available! 🚀 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nasazzam/accelerated_features/blob/main/notebooks/xfeat%2Blg_torch_hub.ipynb)
 
 <div align="center" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
   <div style="display: flex; justify-content: space-around; width: 100%;">
@@ -22,7 +22,7 @@
 
 **TL;DR**: Really fast learned keypoint detector and descriptor. Supports sparse and semi-dense matching.
 
-Just wanna quickly try on your images? Check this out: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/verlab/accelerated_features/blob/main/notebooks/xfeat_torch_hub.ipynb) [![Open in Spaces](https://huggingface.co/datasets/huggingface/badges/resolve/main/open-in-hf-spaces-sm-dark.svg)](https://huggingface.co/spaces/qubvel-hf/xfeat)
+Just wanna quickly try on your images? Check this out: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nasazzam/accelerated_features/blob/main/notebooks/xfeat_torch_hub.ipynb) [![Open in Spaces](https://huggingface.co/datasets/huggingface/badges/resolve/main/open-in-hf-spaces-sm-dark.svg)](https://huggingface.co/spaces/qubvel-hf/xfeat)
 
 ## Table of Contents
 - [Introduction](#introduction) <img align="right" src='./figs/xfeat_quali.jpg' width=360 />
@@ -75,31 +75,128 @@ Furthermore, XFeat performs effectively in both indoor and outdoor scenes, achie
 
 
 ## Installation
-XFeat has minimal dependencies, only relying on torch. Also, XFeat does not need a GPU for real-time sparse inference (vanilla pytorch w/o any special optimization), unless you run it on high-res images. If you want to run the real-time matching demo, you will also need OpenCV.
-We recommend using conda, but you can use any virtualenv of your choice.
-If you use conda, just create a new env with:
-```bash
-git clone https://github.com/verlab/accelerated_features.git
-cd accelerated_features
 
-#Create conda env
-conda create -n xfeat python=3.8
-conda activate xfeat
+XFeat has minimal dependencies, only relying on torch. Also, XFeat does not need a GPU for real-time sparse inference (vanilla pytorch w/o any special optimization), unless you run it on high-res images. If you want to run the real-time matching demo, you will also need OpenCV.
+
+### Quick Installation with uv (Recommended)
+
+[uv](https://github.com/astral-sh/uv) is a fast Python package installer. Install XFeat using uv:
+
+```bash
+# Install uv first (if not already installed)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Install XFeat from GitHub
+uv pip install git+https://github.com/nasazzam/accelerated_features.git
 ```
 
-Then, install [pytorch (>=1.10)](https://pytorch.org/get-started/previous-versions/) and then the rest of depencencies in case you want to run the demos:
+Or install a specific branch or tag:
 ```bash
+uv pip install git+https://github.com/nasazzam/accelerated_features.git@main
+```
 
-#CPU only, for GPU check in pytorch website the most suitable version to your gpu.
-pip install torch==1.10.1+cpu -f https://download.pytorch.org/whl/cpu/torch_stable.html
-# CPU only for MacOS
-# pip install torch==1.10.1 -f https://download.pytorch.org/whl/cpu/torch_stable.html
+### Installation with pip
 
-#Install dependencies for the demo
-pip install opencv-contrib-python tqdm
+You can also install XFeat using traditional pip:
+
+```bash
+pip install git+https://github.com/nasazzam/accelerated_features.git
+```
+
+**Note:** Make sure you have PyTorch installed first. For CPU-only installation:
+```bash
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+```
+
+For GPU (CUDA) installation, visit [PyTorch's website](https://pytorch.org/get-started/locally/) to get the appropriate installation command for your CUDA version.
+
+### Development Installation
+
+For development or to run the demos, clone the repository and install in editable mode:
+
+```bash
+git clone https://github.com/nasazzam/accelerated_features.git
+cd accelerated_features
+
+# Using uv (recommended)
+uv pip install -e .
+
+# Or using pip
+pip install -e .
+
+# Install with training dependencies
+uv pip install -e ".[training]"
+# or
+pip install -e ".[training]"
+```
+
+### Requirements
+
+- Python >= 3.8
+- PyTorch >= 1.10.0
+- OpenCV (opencv-contrib-python-headless)
+- Kornia >= 0.7.0
+
+### Optional Dependencies
+
+- **Training**: Install with `[training]` extra to get `poselib` for training capabilities
+- **Development**: Install with `[dev]` extra for development tools (pytest, black, flake8)
+
+### Verifying Installation
+
+After installation, verify that XFeat works correctly:
+
+```python
+import torch
+from modules.xfeat import XFeat
+
+xfeat = XFeat()
+print("XFeat installed successfully!")
+```
+
+Or run the test script:
+```bash
+python test_installation.py
 ```
 
 ## Usage
+
+### Quick Start After Installation
+
+Once installed via pip, you can use XFeat in your Python scripts:
+
+```python
+import torch
+from modules.xfeat import XFeat
+
+# Initialize XFeat
+xfeat = XFeat()
+
+# Load your images (as torch tensors)
+# Image should be in format: [batch, channels, height, width]
+# Example with random tensor:
+image = torch.randn(1, 3, 480, 640)
+
+# Detect and compute features
+output = xfeat.detectAndCompute(image, top_k=4096)[0]
+
+# Access results
+keypoints = output['keypoints']  # Nx2 array of keypoint locations
+descriptors = output['descriptors']  # Nx64 array of descriptors
+scores = output['scores']  # N array of detection scores
+```
+
+Or use torch hub directly:
+
+```python
+import torch
+
+# Load model from torch hub
+xfeat = torch.hub.load('verlab/accelerated_features', 'XFeat', pretrained=True, top_k=4096)
+
+# Use it
+output = xfeat.detectAndCompute(torch.randn(1, 3, 480, 640), top_k=4096)[0]
+```
 
 For your convenience, we provide ready to use notebooks for some examples.
 

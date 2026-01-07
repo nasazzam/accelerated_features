@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "accelerated_features"
+version = "1.0.0"
+description = "XFeat: Accelerated Features for Lightweight Image Matching"
+readme = "README.md"
+authors = [
+    {name = "Guilherme Potje"},
+    {name = "Felipe Cadar"},
+    {name = "Andre Araujo"},
+    {name = "Renato Martins"},
+    {name = "Erickson R. Nascimento"}
+]
+license = "Apache-2.0"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Image Recognition",
+]
+keywords = ["computer-vision", "image-matching", "keypoint-detection", "feature-extraction", "deep-learning", "pytorch"]
+requires-python = ">=3.8"
+dependencies = [
+    "torch>=1.10.0",
+    "opencv-contrib-python-headless>=4.5.0",
+    "kornia>=0.7.0",
+    "tqdm",
+    "gdown",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "black",
+    "flake8",
+]
+training = [
+    "poselib",
+]
+
+[project.urls]
+Homepage = "https://www.verlab.dcc.ufmg.br/descriptors/xfeat_cvpr24/"
+Repository = "https://github.com/nasazzam/accelerated_features"
+Documentation = "https://github.com/nasazzam/accelerated_features"
+Paper = "https://arxiv.org/abs/2404.19174"
+
+[tool.setuptools]
+packages = ["modules", "modules.dataset", "modules.eval", "modules.training"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"*" = ["*.pt", "*.json"]
+
+[tool.black]
+line-length = 120
+target-version = ['py38']
+
+[tool.flake8]
+max-line-length = 120
+exclude = [".git", "__pycache__", "notebooks", "third_party", "build", "dist"]
+
+
